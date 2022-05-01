@@ -1,0 +1,19 @@
+name: Continuous Deployment
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+      - name: set env
+        run: |
+          cd ~/actions-runner/_work/sideproject/sideproject/ShabbyChat_Client/
+          cp ~/config/client .env
+
+          cd ~/actions-runner/_work/sideproject/sideproject/ShabbyChat_Server/
+          cp ~/config/server .env
+

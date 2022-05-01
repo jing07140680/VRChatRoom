@@ -1,0 +1,117 @@
+OB.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-body{
+  background-color: #282c34;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+}
+
+.App-link {
+  color: #61dafb;
+} 
+
+.button-container {
+    align-items: center;
+
+}
+
+.movie{
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 20px;
+    grid-template-columns: repeat(2  1fr);
+    grid-gap: 5px;
+}
+
+.moviescreen{
+    padding: 20px;
+    grid-column: 1 / 3;
+}
+.videochat{
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 200px 20px;
+    grid-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+} 
+
+.send{
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.receive{
+    padding:10px;
+    font-size: 30px;
+    text-align: center;
+}
+ 
+.message{
+    font-size: 18px;
+    color: white;
+}
+ 
+.chat-window{
+    margin: auto;
+    align-content: center;
+    width: 80%;
+    height: 30%;
+    font-size: 18px;
+}
+
+.chat-room{
+    margin: auto;
+    align-content: center;
+    display: inline-block;
+    text-align: left; 
+    width: 80%; 
+    height: 80%;
+    font-size: 18px;
+    background-color: white;
+    border: 1px solid black;
+    overflow-y: scroll;
+}
+
+
+video {
+  background: #222;
+  margin: 0px 0px 0px 0px;
+  width: 90%;
+  height: 90%;
+  align-content: center;
+}
+
+@Keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+ 

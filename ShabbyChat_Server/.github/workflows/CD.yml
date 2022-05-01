@@ -1,0 +1,14 @@
+name: Continuous Deployment
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+      - name: Restart server application
+        run: pm2 restart server
+        
