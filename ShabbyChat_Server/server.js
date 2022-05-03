@@ -10,6 +10,7 @@ const router = express.Router()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const source = process.env.MONGO_URI
+const parser = require('@asyncapi/parser')
 const { uniqueNamesGenerator, adjectives, colors, animals, names } = require('unique-names-generator');
 var uuid = require('uuid-random');
 let mongoose;
@@ -33,7 +34,6 @@ const User = require('./models/user-model')
 
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
- 
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -459,11 +459,15 @@ app.post('/api',function(req,res){
 })
 */
 
-app.get('/api', (req, res) => {
+
+app.get('/test', (req, res) => {
     console.log("hello")
     res.send('Hello World!')
 })
- 
+app.use('/api', express.static('public'));
+
+
+
 const listener = app.listen(process.env.PORT || 3001, function () {
     console.log("Your app is listening on port " + listener.address().port);
 });
