@@ -3,7 +3,12 @@ import adapter from 'webrtc-adapter';
 import './App.css';
 import { io } from "socket.io-client";
 const socket = io.connect();
-
+/*
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient('localhost:3003', {
+    transports: ['websocket']
+});
+*/
 let localStream; 
 let rtcPeerConnection;
 
@@ -47,7 +52,7 @@ class Videochat  extends React.Component{
 	    rtcPeerConnection.onicecandidate = this.sendIceCandidate
 	    await this.createOffer(rtcPeerConnection)
 	}) 
-	 
+	    
 	socket.on('webrtc_offer', async (event) => {
 	    console.log('Socket event callback: webrtc_offer')
 	    document.getElementById("local").muted = false;
@@ -63,7 +68,7 @@ class Videochat  extends React.Component{
 	    console.log('Socket event callback: webrtc_answer') 
 	    rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event))
 	    console.log(event);
-	}) 
+	})  
 	
 	socket.on('webrtc_ice_candidate', (event) => {
 	    console.log('Socket event callback: webrtc_ice_candidate')
@@ -85,7 +90,7 @@ class Videochat  extends React.Component{
 	    })
  	} }
 
-    
+     
     addLocalTracks(rtcPeerConnection) {
 	console.log("addlocaltrack");
 	console.log(localStream);
@@ -136,12 +141,11 @@ class Videochat  extends React.Component{
 	    localStream = await navigator.mediaDevices.getUserMedia(constraints);
             const videoTracks = localStream.getVideoTracks();
 	    document.getElementById("local").srcObject = localStream;
-            socket.emit('start_call');
- 
+	    socket.emit('start_call')
 	} catch (error) { 
 	    console.log(error);
 	}
-	
+	 
     }
     
          
@@ -149,7 +153,7 @@ class Videochat  extends React.Component{
 	try{
 	    localStream.getTracks().forEach(track => track.stop());
 	    document.getElementById("remote").src = null;
-	    //console.log(localStream);
+	    console.log(localStream);
 	}catch(error){
 	    console.log(error);
 	}
@@ -159,8 +163,8 @@ class Videochat  extends React.Component{
     render(){
 	return (
                 <div className="videochat">
-                <div><video id="local" muted="muted" autoPlay playsInline></video></div>
-		<div><video id="remote" muted="muted"  autoPlay playsInline></video></div>
+                <div><video id="local" autoPlay playsInline></video></div>
+		<div><video id="remote" autoPlay playsInline></video></div>
                 <button className="button-container" onClick={this.call}>Call</button>
 		<button className="button-container" onClick={this.hangup}>Hang Up</button>
                 </div>	    

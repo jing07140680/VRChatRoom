@@ -464,11 +464,11 @@ app.get('/test', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/api', express.static('public'));
+//app.use('/api', express.static('public'));
 
 
 
-const listener = app.listen(process.env.PORT || 3003, function () {
+const listener = app.listen(process.env.PORT || 3001, function () {
     console.log("Your app is listening on port " + listener.address().port);
 });
  
@@ -489,21 +489,20 @@ function sendUpdatedVideoTime(client){
     console.log(setTime)
     client.emit("RetrieveVideoTime", setTime)
     client.broadcast.emit("RetrieveVideoTime", setTime)
-}
- 
+} 
+  
 io.on('connection', (client) => {
     console.log("New client connected");
-    
     client.on('start_call', () => {
-	console.log(`Broadcasting start_call event to peers in room`)
-	client.broadcast.emit('start_call')
-    }) 
-    
-    client.on('webrtc_offer', () => {
+	console.log('Broadcasting start_call event to peers in room');
+	client.broadcast.emit('start_call');
+	console.log('check 1');
+    })   
+    client.on('webrtc_offer', (event) => {
 	console.log(`Broadcasting webrtc_offer event to peers in room`)
 	client.broadcast.emit('webrtc_offer', event.sdp)
     })
-    
+     
     client.on('webrtc_answer', (event) => {
 	console.log(`Broadcasting webrtc_answer event to peers in room ${event.roomId}`)
 	client.broadcast.emit('webrtc_answer', event.sdp)
@@ -514,7 +513,7 @@ io.on('connection', (client) => {
 	client.broadcast.emit('webrtc_ice_candidate', event)
     })
 
-    //Create a User
+    //Create a User 
     client.on("CreateUser", () => {
 	console.log("get create");
 	let userID = uuid();

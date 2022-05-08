@@ -15,7 +15,6 @@ const socket = socketIOClient('localhost:3003', {
     transports: ['websocket']
 });
 */
-
 //server
 import { io } from "socket.io-client";
 const socket = io.connect(); 
@@ -26,8 +25,7 @@ const socket = io.connect();
 /*
 const api = axios.create({
     baseURL: 'http://localhost:3001',
-})
-*/   
+})*/   
 
 
 // change code below this line
@@ -145,7 +143,7 @@ class App extends React.Component{
 	    <div className="App">
 		<ul>
 		    <li><a href="#home">Home</a></li>
-		    <li><a href="http://localhost:3001/api">API</a></li>
+		    <li><a href="/api">API</a></li>
 		    <li><a href="#contact">Contact</a></li>
 		    <li><a href="#about">About</a></li>
 		</ul>
