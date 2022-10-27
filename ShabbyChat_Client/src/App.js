@@ -142,8 +142,8 @@ class App extends React.Component{
 	return (
 	    <div className="App">
 		<ul>
-		    <li><a href="#home">Home</a></li>
-		    <li><a href="/api">API</a></li>
+		    <li><a  target="_blank" href="https://www.xuanhuang.co/mini-three-vr">VR</a></li>
+		    <li><a href="/api/">API</a></li>
 		    <li><a href="#contact">Contact</a></li>
 		    <li><a href="#about">About</a></li>
 		</ul>
