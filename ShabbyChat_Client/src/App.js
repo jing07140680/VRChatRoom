@@ -8,7 +8,7 @@ import myVideo from './asserts/sintel.mp4';
 
 //import axios from 'axios'
 
-//local
+//local 
 /*
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient('localhost:3003', {
@@ -42,7 +42,7 @@ class App extends React.Component{
 	}
 	
 	this.changeCurrentTime = this.changeCurrentTime.bind(this);
-	
+	this.playerMove = this.playerMove.bind(this);
 	this.enterSubmit = this.enterSubmit.bind(this);
 	this.submit = this.submit.bind(this);
 	this.handleInputChange = this.handleInputChange.bind(this);
@@ -81,13 +81,13 @@ class App extends React.Component{
 	    socket.on("RetrieveChatRoomData", (chatRoomData) => {	    
 		console.log(chatRoomData)
 		let ptag = document.createElement('p'); 
-		ptag.innerHTML = chatRoomData;
+		ptag.innerHTML = chatRoomData; 
 		chat.appendChild(ptag);
 		this.setState({
 	            recvMessage: chatRoomData
 		})
  	    
-	    })
+	    }) 
 	}
     }
 
@@ -104,6 +104,12 @@ class App extends React.Component{
  	//const { player } = this.player.getState();
 	//this.player.seek(seconds);
     } 
+
+    playerMove(){
+	let movement = [this.state.userID,1];
+	socket.emit("Movement", {movement});
+	console.log(movement);
+    }
     
     componentWillUnmount() {
 	socket.off("SetUserData")
@@ -130,7 +136,7 @@ class App extends React.Component{
 	this.setState({
 	    isSubmitted:!this.state.isSubmitted
 	}); 
-	let data = this.state.userID+"->"+this.state.username+": "+this.state.input
+	let data = this.state.userID+"->"+this.state.username+": "+this.state.input;
 	socket.emit("SendMessage", {data});
     }
      
@@ -167,7 +173,7 @@ class App extends React.Component{
 		
 	        <input className="button-container" type="number" id="seconds"/>
                 <button className="button-container" type="button" onClick={this.changeCurrentTime}>set seconds</button>
-		
+	        <button className="button-container" type="button" onClick={this.playerMove}>player movement</button>	
  	            </div>
 		    <Videochat />
 		    <div className="receive">
